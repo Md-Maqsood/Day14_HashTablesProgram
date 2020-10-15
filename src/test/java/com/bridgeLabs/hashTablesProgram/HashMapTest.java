@@ -22,4 +22,24 @@ public class HashMapTest {
 		logger.debug(hashMap);
 		Assert.assertEquals(2, toFrequency);
 	}
+	
+	@Test
+	public void givenASentenceWhenWordsAddedToHashMapShouldReturnParanoidFrequency() {
+		HashMap<String, Integer> hashMap= new HashMap<String, Integer>();
+		String sentence="paranoid are not " + 
+						"paranoid because they are paranoid but " + 
+						"because they keep putting themselves " + 
+						"deliberately into paranoid avoidable " + 
+						"situations";
+		for(String word: sentence.split(" ")) {
+			if(hashMap.get(word)==null) {
+				hashMap.add(word, 1);
+			}else {
+				hashMap.add(word, hashMap.get(word)+1);;
+			}
+		}
+		int toFrequency=hashMap.get("paranoid");
+		logger.debug(hashMap);
+		Assert.assertEquals(4, toFrequency);
+	}
 }
