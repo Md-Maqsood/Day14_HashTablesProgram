@@ -100,10 +100,10 @@ public class LinkedList<K> {
 		logger.debug(" Size: " + size + "\n");
 	}
 
-	public INode<K> search(K searchValue) {
+	public INode<K> search(K key) {
 		INode<K> node = this.head;
 		while (node != null) {
-			if (node.getKey().equals(searchValue)) {
+			if (node.getKey().equals(key)) {
 				return node;
 			}
 			node = node.getNext();
@@ -111,10 +111,10 @@ public class LinkedList<K> {
 		return null;
 	}
 
-	public void insertAfter(K value, INode<K> newNode) {
+	public void insertAfter(K key, INode<K> newNode) {
 		INode<K> node = this.head;
 		while (node != null) {
-			if (node.getKey().equals(value)) {
+			if (node.getKey().equals(key)) {
 				break;
 			}
 			node = node.getNext();
@@ -124,16 +124,16 @@ public class LinkedList<K> {
 		}
 	}
 
-	public void remove(K value) {
+	public void remove(K key) {
 		INode<K> node = this.head;
 		if (node == this.tail && node != null) {
-			if (node.getKey().equals(value)) {
+			if (node.getKey().equals(key)) {
 				this.head = null;
 				this.tail = null;
 				size--;
 			}
 		} else if (node != null) {
-			while (node != this.tail && !(node.getNext().getKey().equals(value))) {
+			while (node != this.tail && !(node.getNext().getKey().equals(key))) {
 				node = node.getNext();
 			}
 			if (node != this.tail) {

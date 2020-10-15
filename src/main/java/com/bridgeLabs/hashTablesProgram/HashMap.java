@@ -19,6 +19,20 @@ public class HashMap<K, V> {
 		}
 	}
 	
+	public int getSize() {
+		int size=0;
+		for(LinkedList<K> linkedList: bucketArray) {
+			if(linkedList!=null) {
+				size+=linkedList.size();
+			}
+		}
+		return size;
+	}
+	
+	public boolean isEmpty() {
+		return getSize()==0;
+	}
+	
 	public int getIndex(K key) {
 		int hashKey=Math.abs(key.hashCode());
 		int index=hashKey%numBuckets;
@@ -49,6 +63,14 @@ public class HashMap<K, V> {
 			mapNode.setValue(value);
 		}
 	}
+	
+	public void remove(K key) {
+		int index=getIndex(key);
+		LinkedList<K> linkedList=bucketArray.get(index);
+		if(linkedList!=null) {
+			linkedList.remove(key);
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -70,5 +92,7 @@ public class HashMap<K, V> {
 			}
 		}
 		logger.debug(hashMap);
+		hashMap.remove("avoidable");
+		logger.debug("\n"+hashMap);
 	}
 }
