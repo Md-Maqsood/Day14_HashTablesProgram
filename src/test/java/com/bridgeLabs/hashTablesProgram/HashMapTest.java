@@ -1,12 +1,25 @@
 package com.bridgeLabs.hashTablesProgram;
 
-import static org.junit.Assert.assertTrue;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Test;
 
 public class HashMapTest {
+	private static final Logger logger = LogManager.getLogger(HashMap.class);
 	@Test
-	public void shouldAnswerWithTrue() {
-		assertTrue(true);
+	public void givenASentenceWhenWordsAddedToHashMapShouldReturnWordFrequency() {
+		HashMap<String, Integer> hashMap= new HashMap<String, Integer>();
+		String sentence="to be or not to be";
+		for(String word: sentence.split(" ")) {
+			if(hashMap.get(word)==null) {
+				hashMap.add(word, 1);
+			}else {
+				hashMap.add(word, hashMap.get(word)+1);;
+			}
+		}
+		int toFrequency=hashMap.get("to");
+		logger.debug(hashMap);
+		Assert.assertEquals(2, toFrequency);
 	}
 }
